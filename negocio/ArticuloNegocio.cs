@@ -13,16 +13,16 @@ namespace negocio
 {
     public class ArticuloNegocio
     {
-        
+
         public List<Articulo> listar()
         {
             List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
 
-                 
+
             try
             {
-                
+
                 datos.setearConsulta("select A.Id, A.Codigo, M.Descripcion as Marca, Nombre as Modelo, C.Descripcion as Categoria, A.Descripcion, ImagenUrl, Precio, A.IdMarca, A.IdCategoria from ARTICULOS A, CATEGORIAS C, MARCAS M where C.Id = A.IdCategoria and M.Id = A.IdMarca");
                 datos.ejecutarLectura();
 
@@ -42,7 +42,7 @@ namespace negocio
                     aux.PrecioFormateado = convmoneda((decimal)datos.Lector["Precio"]);
                     aux.Marca.Id = (int)datos.Lector["IdMarca"];
                     aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
-                    
+
                     lista.Add(aux);
                 }
             }
@@ -51,11 +51,11 @@ namespace negocio
 
                 throw ex;
             }
-            finally {datos.cerrarConexion();}
+            finally { datos.cerrarConexion(); }
             return lista;
         }
 
-        public void agregarArticulo (Articulo nuevo)
+        public void agregarArticulo(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
 
@@ -78,26 +78,26 @@ namespace negocio
                 throw ex;
             }
             finally
-            { 
+            {
                 datos.cerrarConexion();
             }
         }
 
-        
+
         public string convmoneda(decimal aux)
         {
-         return String.Format(CultureInfo.CreateSpecificCulture("es-AR"), "{0:00.00}", aux);
+            return String.Format(CultureInfo.CreateSpecificCulture("es-AR"), "{0:00.00}", aux);
         }
 
         public void modificar(Articulo articulo)
-        { 
+        {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
                 datos.setearConsulta("update ARTICULOS set  Codigo = @codigo, Nombre = @nombre, Descripcion = @desc, IdMarca = @idmarca, IdCategoria = @idcategoria, ImagenUrl = @imagenurl, Precio = @precio where Id=@id");
 
-                
+
                 datos.setearParametro("@codigo", articulo.Codigo);
                 datos.setearParametro("@nombre", articulo.Modelo);
                 datos.setearParametro("@desc", articulo.Descripcion);
@@ -138,7 +138,7 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
-            
+
         }
 
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
@@ -169,7 +169,7 @@ namespace negocio
                                 break;
                         }
                         break;
-                   
+
                     case "Marca":
 
                         switch (criterio)
@@ -186,7 +186,7 @@ namespace negocio
                                 consulta += "M.Descripcion like '%" + filtro + "%'";
                                 break;
                         }
-                        break ;
+                        break;
 
 
                     default:
@@ -205,7 +205,7 @@ namespace negocio
                                 break;
                         }
                         break;
-                        
+
                 }
                 datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
@@ -241,5 +241,5 @@ namespace negocio
             return lista;
         }
     }
-    
+
 }
