@@ -39,7 +39,7 @@
         <div class="col-6">
             <div class="mb-3">
                 <label for="urlImagenProducto" class="form-label">Url imagen: </label>
-                <asp:TextBox ID="txtboxUrlImagenProducto" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtboxUrlImagenProducto" AutoPostBack="true" OnTextChanged="txtboxUrlImagenProducto_TextChanged" CssClass="form-control" runat="server" />
                 <asp:Image ID="imgArticulo"
                     ImageUrl="https://i0.wp.com/port2flavors.com/wp-content/uploads/2022/07/placeholder-614.png?w=1200&ssl=1"
                     runat="server" CssClass="img-fluid mb-3" />

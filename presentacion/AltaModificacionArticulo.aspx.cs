@@ -30,14 +30,17 @@ namespace presentacion
                 ddlMarca.DataTextField = "Descripcion";
                 ddlMarca.DataBind();
 
+
+
             }
 
-            if (Request.QueryString["Id"] != null)
+            string id = Request.QueryString["id"] != null ? Request.QueryString["id"] : "";
+            if (id != "" && !IsPostBack)
             {
-                int id = int.Parse(Request.QueryString["Id"].ToString());
-
-                List<Articulo> temporal = (List<Articulo>)Session["listaArticulos"];
-                Articulo seleccionado = temporal.Find(x => x.Id == id);
+                
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                Articulo seleccionado = negocio.listar(id)[0];
+                Session.Add("articuloSeleccionado", seleccionado);
 
                 ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
                 ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
@@ -52,23 +55,43 @@ namespace presentacion
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulo articuloNuevo = new Articulo();
-
-            articuloNuevo.Marca = new Marca();
-            articuloNuevo.Marca.Id = int.Parse(ddlMarca.SelectedValue);
-            articuloNuevo.Modelo = txtboxModelo.Text;
-            articuloNuevo.Codigo = txtboxCodigo.Text;
-            articuloNuevo.Descripcion = txtboxDescripcion.Text;
-            articuloNuevo.Categoria = new Categoria();
-            articuloNuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
-            articuloNuevo.Precio = decimal.Parse(txtboxPrecio.Text);
-            articuloNuevo.UrlImagen = txtboxUrlImagenProducto.Text;
-                    
-
+            Articulo nuevo = new Articulo();
             ArticuloNegocio negocio = new ArticuloNegocio();
-            negocio.agregarArticulo(articuloNuevo);
-            Response.Redirect("Administracion.aspx", false);
 
+            nuevo.Marca = new Marca();
+            nuevo.Marca.Id = int.Parse(ddlMarca.SelectedValue);
+            nuevo.Modelo = txtboxModelo.Text;
+            nuevo.Codigo = txtboxCodigo.Text;
+            nuevo.Descripcion = txtboxDescripcion.Text;
+            nuevo.Categoria = new Categoria();
+            nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
+            nuevo.Precio = decimal.Parse(txtboxPrecio.Text);
+            nuevo.UrlImagen = txtboxUrlImagenProducto.Text;
+
+            if (Request.QueryString["id"] != null)
+            {
+                nuevo.Id = int.Parse(Request.QueryString["id"]);
+                negocio.modificar(nuevo);
+                Response.Redirect("Administracion.aspx");
+            }
+            else
+            { 
+                negocio.agregarArticulo(nuevo);
+                Response.Redirect("Administracion.aspx");
+            }
+
+
+
+
+            //ArticuloNegocio negocio = new ArticuloNegocio();
+            //negocio.agregarArticulo(articuloNuevo);
+            //Response.Redirect("Administracion.aspx", false);
+
+        }
+
+        protected void txtboxUrlImagenProducto_TextChanged(object sender, EventArgs e)
+        {
+            imgArticulo.ImageUrl = txtboxUrlImagenProducto.Text;
         }
     }
 }
