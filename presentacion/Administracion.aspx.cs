@@ -12,8 +12,10 @@ namespace presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             ArticuloNegocio negocio = new ArticuloNegocio();
-            dgvArticulos.DataSource = negocio.listar();
+            Session.Add("listaArticulos", negocio.listar());
+            dgvArticulos.DataSource = Session["listaArticulos"];
             dgvArticulos.DataBind();
 
         }

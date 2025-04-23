@@ -32,13 +32,22 @@ namespace presentacion
 
             }
 
-            //if (Request.QueryString["Id"] != null)
-            //{
-            //    int id = int.Parse(Request.QueryString["Id"].ToString());
+            if (Request.QueryString["Id"] != null)
+            {
+                int id = int.Parse(Request.QueryString["Id"].ToString());
 
-            //    List<Articulo> temporal = (List<Articulo>)Session["lista"];
-            //    Articulo seleccionado = temporal.Find(x=> x.Id == id);
-            //}
+                List<Articulo> temporal = (List<Articulo>)Session["listaArticulos"];
+                Articulo seleccionado = temporal.Find(x => x.Id == id);
+
+                ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
+                ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
+                txtboxModelo.Text = seleccionado.Modelo;
+                txtboxCodigo.Text = seleccionado.Codigo;
+                txtboxDescripcion.Text = seleccionado.Descripcion;
+                txtboxPrecio.Text = seleccionado.PrecioFormateado;
+                txtboxUrlImagenProducto.Text = seleccionado.UrlImagen;
+                imgArticulo.ImageUrl = txtboxUrlImagenProducto.Text;
+            }
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -53,11 +62,12 @@ namespace presentacion
             articuloNuevo.Categoria = new Categoria();
             articuloNuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
             articuloNuevo.Precio = decimal.Parse(txtboxPrecio.Text);
-            articuloNuevo.UrlImagen = "Test";
+            articuloNuevo.UrlImagen = txtboxUrlImagenProducto.Text;
+                    
 
             ArticuloNegocio negocio = new ArticuloNegocio();
             negocio.agregarArticulo(articuloNuevo);
-            Response.Redirect("Administracion.aspx",false);
+            Response.Redirect("Administracion.aspx", false);
 
         }
     }
