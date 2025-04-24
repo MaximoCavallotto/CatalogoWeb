@@ -11,10 +11,14 @@ namespace presentacion
 {
     public partial class AltaModificacionArticulo : System.Web.UI.Page
     {
+        public bool banEliminar = false;
         protected void Page_Load(object sender, EventArgs e)
         {
+          
             if (!IsPostBack)
             {
+               
+
                 CategoriaNegocio negocioCategoria = new CategoriaNegocio();
                 List<Categoria> listaCategoria = negocioCategoria.listar();
                 
@@ -37,6 +41,7 @@ namespace presentacion
             string id = Request.QueryString["id"] != null ? Request.QueryString["id"] : "";
             if (id != "" && !IsPostBack)
             {
+                btneliminar.Visible = true;
                 
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 Articulo seleccionado = negocio.listar(id)[0];
@@ -92,6 +97,17 @@ namespace presentacion
         protected void txtboxUrlImagenProducto_TextChanged(object sender, EventArgs e)
         {
             imgArticulo.ImageUrl = txtboxUrlImagenProducto.Text;
+        }
+
+        protected void btnConfirmarEliminacion_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            negocio.eliminar(int.Parse(Request.QueryString["id"]));
+        }
+
+        protected void btneliminar_Click(object sender, EventArgs e)
+        {
+            banEliminar = true;
         }
     }
 }
