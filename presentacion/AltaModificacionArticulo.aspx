@@ -45,11 +45,12 @@
                     ImageUrl="https://i0.wp.com/port2flavors.com/wp-content/uploads/2022/07/placeholder-614.png?w=1200&ssl=1"
                     runat="server" CssClass="img-fluid mb-3" />
             </div>
+             <asp:UpdatePanel runat="server">
+     <ContentTemplate>
             <div class="mb-3">
                 <asp:Button CssClass="btn btn-danger" visible="false" OnClick="btneliminar_Click" Text="Eliminar" ID="btneliminar" runat="server" />
             </div>
-            <asp:UpdatePanel runat="server">
-                <ContentTemplate>
+           
                     <% if (banEliminar)
                         { %>
                     <div class="mb-3">
