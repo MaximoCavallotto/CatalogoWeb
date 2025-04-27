@@ -21,18 +21,29 @@ namespace presentacion
             Usuario usuario = new Usuario();
             UsuarioNegocio negocio = new UsuarioNegocio();
 
-            usuario.Email = txtboxEmail.Text;
-            usuario.Pass = txtboxPass.Text;
+            try
+            {
+                usuario.Email = txtboxEmail.Text;
+                usuario.Pass = txtboxPass.Text;
 
-            if (negocio.loguear(usuario))
-            {
-                Response.Redirect("Default.aspx", false);
+                if (negocio.loguear(usuario))
+                {
+                    Response.Redirect("Default.aspx", false);
+                    Session.Add("usuario", usuario);
+                }
+                else
+                {
+                    Session.Add("error", "Usuario o Contraseña incorrecta. Por favor reintente.");
+                    Response.Redirect("Error.aspx", false);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Session.Add("error", "Usuario o Contraseña incorrecta. Por favor reintente.");
+                Session.Add("error", ex);
                 Response.Redirect("Error.aspx", false);
             }
+
+           
         }
     }
 }

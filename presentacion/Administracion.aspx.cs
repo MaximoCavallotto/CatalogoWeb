@@ -13,6 +13,12 @@ namespace presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.esAdmin(Session["usuario"]))
+            {
+                Session.Add("error", "Se requiere una cuenta de administrador para acceder a este contenido");
+                Response.Redirect("Error.aspx", false);
+            }
+
 
             ArticuloNegocio negocio = new ArticuloNegocio();
             Session.Add("listaArticulos", negocio.listar());

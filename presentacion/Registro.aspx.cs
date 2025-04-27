@@ -26,8 +26,9 @@ namespace presentacion
                 usuario.Email = txtboxEmail.Text;
                 usuario.Pass = txtboxPass.Text;
                 usuario.Id = negocio.insertarNuevo(usuario);
+                Session.Add("usuario", usuario);
 
-                Response.Redirect("Default.aspx", false);
+                Response.Redirect("MiPerfil.aspx", false);
 
             }
             catch (Exception ex)

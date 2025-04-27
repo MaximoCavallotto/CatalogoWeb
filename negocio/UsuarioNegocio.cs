@@ -46,7 +46,7 @@ namespace negocio
                 while (datos.Lector.Read())
                 {
                     usuario.Id = (int)datos.Lector["id"];
-                    usuario.TipoUsuario = (bool)datos.Lector["admin"] == true ? Usuario.tipoUsuario.admin : Usuario.tipoUsuario.normal;
+                    usuario.Admin = (bool)datos.Lector["admin"] == true ? usuario.Admin = true : usuario.Admin = false;
                     return true;
                 }
                 return false;

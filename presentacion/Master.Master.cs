@@ -1,4 +1,5 @@
-﻿using System;
+﻿using negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,11 @@ namespace presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Page is Login || Page is Default || Page is Registro || Page is Error))
+            {
+                if (!Seguridad.sesionActiva(Session["usuario"]))
+                    Response.Redirect("Login.aspx", false);
+            }
 
         }
     }
