@@ -14,7 +14,7 @@ namespace negocio
     public class ArticuloNegocio
     {
 
-        public List<Articulo> listar(string id="")
+        public List<Articulo> listar(string id = "")
         {
             List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
@@ -244,6 +244,46 @@ namespace negocio
                 throw ex;
             }
             return lista;
+        }
+
+        public List<Articulo> listarArtFavoritos(string id)
+        {
+            List<Articulo> listaArtFav = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("select A.Id, M.Descripcion as Marca, A.Nombre as Modelo, A.Descripcion, ImagenUrl, Precio from ARTICULOS A, MARCAS M, FAVORITOS F, USERS U where A.Id = F.IdArticulo and M.Id = A.IdMarca and U.Id = @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.Marca = new Marca();
+                    aux.Categoria = new Categoria();
+
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    aux.Modelo = (string)datos.Lector["Modelo"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.UrlImagen = (string)datos.Lector["ImagenUrl"];
+                    aux.PrecioFormateado = convmoneda((decimal)datos.Lector["Precio"]);
+                   
+                    listaArtFav.Add(aux);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            { datos.cerrarConexion(); }
+
+            return listaArtFav;
+
         }
     }
 
