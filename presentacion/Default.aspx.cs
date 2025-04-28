@@ -16,9 +16,15 @@ namespace presentacion
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             ListaArticulos = negocio.listar();
-            
+
             repArticulos.DataSource = ListaArticulos;
             repArticulos.DataBind();
+        }
+
+        protected void btnDetalle_Click(object sender, EventArgs e)
+        {
+            string seleccionadoId = ((Button)sender).CommandArgument;
+            Response.Redirect("Detalles.aspx?id=" + seleccionadoId);
         }
     }
 }
