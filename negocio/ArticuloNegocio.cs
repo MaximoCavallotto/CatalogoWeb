@@ -253,7 +253,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("select A.Id, M.Descripcion as Marca, A.Nombre as Modelo, A.Descripcion, ImagenUrl, Precio from ARTICULOS A, MARCAS M, FAVORITOS F, USERS U where A.Id = F.IdArticulo and M.Id = A.IdMarca and U.Id = @id");
+                datos.setearConsulta("SELECT A.Id, M.Descripcion AS Marca, A.Nombre AS Modelo, A.Descripcion, A.ImagenUrl, A.Precio FROM FAVORITOS F INNER JOIN ARTICULOS A ON A.Id = F.IdArticulo INNER JOIN MARCAS M ON M.Id = A.IdMarca WHERE F.IdUser = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
 
