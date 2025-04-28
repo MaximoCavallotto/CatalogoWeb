@@ -28,8 +28,8 @@ namespace presentacion
 
                 if (negocio.loguear(usuario))
                 {
-                    Response.Redirect("Default.aspx", false);
                     Session.Add("usuario", usuario);
+                    Response.Redirect("Default.aspx", false);
                 }
                 else
                 {

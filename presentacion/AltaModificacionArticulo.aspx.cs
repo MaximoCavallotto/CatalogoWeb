@@ -14,11 +14,15 @@ namespace presentacion
         public bool banEliminar = false;
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+            if (!Seguridad.esAdmin(Session["usuario"]))
+            {
+                Session.Add("error", "Se requiere una cuenta de administrador para acceder a este contenido");
+                Response.Redirect("Error.aspx", false);
+            }
+
             if (!IsPostBack)
             {
                
-
                 CategoriaNegocio negocioCategoria = new CategoriaNegocio();
                 List<Categoria> listaCategoria = negocioCategoria.listar();
                 

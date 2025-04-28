@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dominio;
+using negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,12 +13,55 @@ namespace presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                if (Seguridad.sesionActiva(Session["usuario"]))
+                {
+                    Usuario user = (Usuario)Session["Usuario"];
+
+                    txtboxEmail.Text = user.Email;
+                    txtboxEmail.ReadOnly = true;
+                    txtboxNombre.Text = user.Nombre;
+                    txtboxApellido.Text = user.Apellido;
+                                                          
+
+                    if (!string.IsNullOrEmpty(user.UrlImagenPerfil))
+                        imgPerfil.ImageUrl = "~/Images/" + user.UrlImagenPerfil;
+
+                }
+            }
 
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                UsuarioNegocio negocio = new UsuarioNegocio();
+                Usuario user = (Usuario)Session["usuario"];
 
+                if (txtImagen.PostedFile.FileName != "")
+                {
+                    string ruta = Server.MapPath("./Images/");
+                    txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
+                    user.UrlImagenPerfil = "perfil-" + user.Id + ".jpg";
+
+                }
+
+
+                user.UrlImagenPerfil = "perfil-" + user.Id + ".jpg";
+                user.Nombre = txtboxNombre.Text;
+                user.Apellido = txtboxApellido.Text;
+                negocio.actualizarUser(user);
+
+                Image img = (Image)Master.FindControl("imgAvatar");
+                img.ImageUrl = "~/images/" + user.UrlImagenPerfil;
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }

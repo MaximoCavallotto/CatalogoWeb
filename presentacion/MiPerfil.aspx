@@ -30,4 +30,5 @@
                 <asp:Image ID="imgPerfil" ImageUrl="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" runat="server" CssClass=" img-fluid mb-3" />
             </div>
         </div>
+    </div>
 </asp:Content>

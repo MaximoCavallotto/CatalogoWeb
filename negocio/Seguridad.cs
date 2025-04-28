@@ -26,7 +26,7 @@ namespace negocio
         public static bool esAdmin(object user)
         {
             Usuario usuario = user != null ? (Usuario)user : null;
-            return usuario != null ? usuario.Admin = true : false; 
+            return usuario != null ? usuario.Admin : false;
         }
     }
 }
