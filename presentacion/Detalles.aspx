@@ -19,7 +19,6 @@
                             <asp:Label ID="lblPrecio" Text="" runat="server" />
                         </p>
                         <a href="Default.aspx" class="btn btn-outline-primary">Regresar</a>
-                        <asp:Button class="btn btn-outline-primary" ID="btnFavorito" Text="⭐​" runat="server" />
                     </div>
                 </div>
             </div>

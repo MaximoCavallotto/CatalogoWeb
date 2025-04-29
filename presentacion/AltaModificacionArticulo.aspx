@@ -34,7 +34,7 @@
             </div>
             <div class="mb-3">
                 <asp:Button Text="Aceptar" OnClick="btnAceptar_Click" CssClass="btn btn-primary" ID="btnAceptar" runat="server" />
-                <a href="Default.aspx">Cancelar</a>
+                <a href="Administracion.aspx">Cancelar</a>
             </div>
         </div>
         <div class="col-6">

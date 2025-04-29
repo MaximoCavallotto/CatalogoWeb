@@ -17,6 +17,9 @@ namespace dominio
         public string Descripcion { get; set; }
         public Categoria Categoria { get; set; }
         public string UrlImagen { get; set; }
+
+        //prop auxiliar para poder evaluar en la funcion eliminar favorito.
+        public int IdFavorito { get; set; }
         public decimal Precio { get; set; }
 
         [DisplayName ("Precio")]

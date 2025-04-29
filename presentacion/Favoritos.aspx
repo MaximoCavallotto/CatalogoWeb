@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Favoritos.aspx.cs" Inherits="presentacion.Favoritos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Favoritos.aspx.cs" EnableEventValidation="false"  Inherits="presentacion.Favoritos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -17,6 +17,7 @@
                                 <p class="card-text"><i><%#Eval("Modelo")%></i></p>
                                 <p class="card-text"><%#Eval("Descripcion")%></p>
                                 <p class="card-text">Precio: $<%#Eval("PrecioFormateado")%></p>
+                                <asp:Button Text="Quitar de favoritos" ID="btnEliminarFav" commandArgument='<%#Eval("IdFavorito")%>' CommandName="favSeleccionadoId" onclick="btnEliminarFav_Click" runat="server" />
                             </div>
                         </div>
                     </div>

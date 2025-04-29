@@ -22,10 +22,10 @@ namespace presentacion
 
             if (!IsPostBack)
             {
-               
+
                 CategoriaNegocio negocioCategoria = new CategoriaNegocio();
                 List<Categoria> listaCategoria = negocioCategoria.listar();
-                
+
                 ddlCategoria.DataSource = listaCategoria;
                 ddlCategoria.DataValueField = "Id";
                 ddlCategoria.DataTextField = "Descripcion";
@@ -46,7 +46,7 @@ namespace presentacion
             if (id != "" && !IsPostBack)
             {
                 btneliminar.Visible = true;
-                
+
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 Articulo seleccionado = negocio.listar(id)[0];
                 Session.Add("articuloSeleccionado", seleccionado);
@@ -84,7 +84,7 @@ namespace presentacion
                 Response.Redirect("Administracion.aspx");
             }
             else
-            { 
+            {
                 negocio.agregarArticulo(nuevo);
                 Response.Redirect("Administracion.aspx");
             }

@@ -253,17 +253,19 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("SELECT A.Id, M.Descripcion AS Marca, A.Nombre AS Modelo, A.Descripcion, A.ImagenUrl, A.Precio FROM FAVORITOS F INNER JOIN ARTICULOS A ON A.Id = F.IdArticulo INNER JOIN MARCAS M ON M.Id = A.IdMarca WHERE F.IdUser = @id");
+                datos.setearConsulta("SELECT F.Id as IdFavorito, A.Id as IdArticulo, M.Descripcion AS Marca, A.Nombre AS Modelo, A.Descripcion, A.ImagenUrl, A.Precio FROM FAVORITOS F INNER JOIN ARTICULOS A ON A.Id = F.IdArticulo INNER JOIN MARCAS M ON M.Id = A.IdMarca WHERE F.IdUser = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
+                    Favorito auxFav = new Favorito();
                     aux.Marca = new Marca();
                     aux.Categoria = new Categoria();
 
-                    aux.Id = (int)datos.Lector["Id"];
+                    aux.IdFavorito = (int)datos.Lector["IdFavorito"];
+                    aux.Id = (int)datos.Lector["IdArticulo"];
                     aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                     aux.Modelo = (string)datos.Lector["Modelo"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];

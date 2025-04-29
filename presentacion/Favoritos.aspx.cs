@@ -25,5 +25,18 @@ namespace presentacion
                 repArticulos.DataBind();
             }
         }
+
+        protected void btnEliminarFav_Click(object sender, EventArgs e)
+        {
+            FavoritoNegocio favoritoNegocio = new FavoritoNegocio();
+            
+            int IdFavorito = int.Parse(((Button)sender).CommandArgument);
+            favoritoNegocio.eliminarFavorito(IdFavorito);
+            Response.Redirect("Favoritos.aspx", false);
+
+
+
+
+        }
     }
 }
