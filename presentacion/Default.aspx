@@ -5,6 +5,32 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
     <h1>Esto es el home</h1>
+    <%--Barra de búsqueda rápida.--%>
+    <div class="container">
+        <asp:TextBox runat="server" ID="txtboxBuscar" />
+        <asp:Button ID="btnBuscar" Text="🔎​" OnClick="btnBuscar_Click" runat="server" />
+        <asp:Button Text="​🔃​" ID="btnReset" OnClick="btnReset_Click" runat="server" />
+    </div>
+    <%--Filtros--%>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <label>Marcas</label>
+                <div>
+                    <asp:DropDownList onselectedindexchanged="ddlMarcas_SelectedIndexChanged" autopostback="true" CssClass="btn btn-secondary dropdown-toggle" ID="ddlMarcas" runat="server"></asp:DropDownList>
+                </div>
+            </div>
+            <div class="col">
+                <label>Categoria</label>
+                <div>
+                    <asp:DropDownList OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true" CssClass="btn btn-secondary dropdown-toggle" ID="ddlCategoria" runat="server"></asp:DropDownList>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--Cards--%>
     <div class="container" style="max-width: 80%">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <asp:Repeater runat="server" ID="repArticulos">

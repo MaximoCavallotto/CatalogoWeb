@@ -36,7 +36,7 @@ namespace presentacion
         protected void txtboxFiltroRapido_TextChanged(object sender, EventArgs e)
         {
             List<Articulo> lista = (List<Articulo>)Session["listaArticulos"];
-            List<Articulo> listaFiltrada = lista.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(txtboxFiltroRapido.Text.ToUpper()));
+            List<Articulo> listaFiltrada = lista.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(txtboxFiltroRapido.Text.ToUpper()) || x.Modelo.ToUpper().Contains(txtboxFiltroRapido.Text.ToUpper()));
 
             dgvArticulos.DataSource = listaFiltrada;
             dgvArticulos.DataBind();

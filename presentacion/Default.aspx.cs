@@ -14,12 +14,29 @@ namespace presentacion
         public List<Articulo> ListaArticulos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-                       
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            ListaArticulos = negocio.listar();
+            if (!IsPostBack)
+            {
+                MarcaNegocio marcaNegocio = new MarcaNegocio();
+                List<Marca> listaMarca = marcaNegocio.listar();
+                ddlMarcas.DataSource = listaMarca;
+                ddlMarcas.DataValueField = "Id";
+                ddlMarcas.DataTextField = "Descripcion";
+                ddlMarcas.DataBind();
 
-            repArticulos.DataSource = ListaArticulos;
-            repArticulos.DataBind();
+                CategoriaNegocio negocioCategoria = new CategoriaNegocio();
+                List<Categoria> listaCategoria = negocioCategoria.listar();
+                ddlCategoria.DataSource = listaCategoria;
+                ddlCategoria.DataValueField = "Id";
+                ddlCategoria.DataTextField = "Descripcion";
+                ddlCategoria.DataBind();
+
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                ListaArticulos = negocio.listar();
+
+                repArticulos.DataSource = ListaArticulos;
+                repArticulos.DataBind();
+
+            }
         }
 
         protected void btnDetalle_Click(object sender, EventArgs e)
@@ -40,6 +57,48 @@ namespace presentacion
             favoritoNegocio.agregarFavorito(nuevo);
             
 
+        }
+        
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            List<Articulo> lista = negocio.listar();
+            List<Articulo> listaFiltrada = lista.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(txtboxBuscar.Text.ToUpper()) || x.Modelo.ToUpper().Contains(txtboxBuscar.Text.ToUpper()));
+
+            repArticulos.DataSource = listaFiltrada;
+            repArticulos.DataBind();
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            repArticulos.DataSource = negocio.listar();
+            repArticulos.DataBind();
+
+        }
+
+        protected void ddlMarcas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string marcaSeleccionada = ddlMarcas.SelectedItem.ToString();
+
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            List<Articulo> lista = negocio.listar();
+            List<Articulo> listaFiltrada = lista.FindAll(x => x.Marca.Descripcion == marcaSeleccionada);
+
+            repArticulos.DataSource = listaFiltrada;
+            repArticulos.DataBind();
+        }
+
+        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string categoriaSeleccionada = ddlCategoria.SelectedItem.ToString();
+
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            List<Articulo> lista = negocio.listar();
+            List<Articulo> listaFiltrada = lista.FindAll(x => x.Categoria.Descripcion == categoriaSeleccionada);
+
+            repArticulos.DataSource = listaFiltrada;
+            repArticulos.DataBind();
         }
     }
 }
