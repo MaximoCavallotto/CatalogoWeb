@@ -27,7 +27,11 @@
                     <asp:DropDownList OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true" CssClass="btn btn-secondary dropdown-toggle" ID="ddlCategoria" runat="server"></asp:DropDownList>
                 </div>
             </div>
+            <div class="col">   
+            <asp:Button Text="Ordenar por menor precio" ID="btnMasBarato" OnClick="btnMasBarato_Click" runat="server" />
+            <asp:Button Text="Ordenar por mayor precio" ID="btnMasCaro" OnClick="btnMasCaro_Click" runat="server" />
         </div>
+            </div>
     </div>
 
     <%--Cards--%>

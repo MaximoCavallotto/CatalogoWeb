@@ -2,10 +2,12 @@
 using negocio;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
 
 namespace presentacion
 {
@@ -98,6 +100,30 @@ namespace presentacion
             List<Articulo> listaFiltrada = lista.FindAll(x => x.Categoria.Descripcion == categoriaSeleccionada);
 
             repArticulos.DataSource = listaFiltrada;
+            repArticulos.DataBind();
+        }
+
+        protected void btnMasBarato_Click(object sender, EventArgs e)
+        {
+           
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                List<Articulo> lista = negocio.listar();
+                List<Articulo> masBaratos = lista.OrderBy(x => x.Precio).ToList();
+
+                repArticulos.DataSource = masBaratos;
+                repArticulos.DataBind();
+                
+            }
+            }
+
+        protected void btnMasCaro_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            List<Articulo> lista = negocio.listar();
+            List<Articulo> masCaros = lista.OrderByDescending(x => x.Precio).ToList();
+
+            repArticulos.DataSource = masCaros;
             repArticulos.DataBind();
         }
     }

@@ -45,6 +45,7 @@ namespace negocio
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.UrlImagen = (string)datos.Lector["ImagenUrl"];
                     aux.PrecioFormateado = convmoneda((decimal)datos.Lector["Precio"]);
+                    aux.Precio = (decimal)datos.Lector["Precio"];
                     aux.Marca.Id = (int)datos.Lector["IdMarca"];
                     aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
 
