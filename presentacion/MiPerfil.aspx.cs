@@ -23,7 +23,7 @@ namespace presentacion
                     txtboxEmail.ReadOnly = true;
                     txtboxNombre.Text = user.Nombre;
                     txtboxApellido.Text = user.Apellido;
-                                                          
+
 
                     if (!string.IsNullOrEmpty(user.UrlImagenPerfil))
                         imgPerfil.ImageUrl = "~/Images/" + user.UrlImagenPerfil;
@@ -45,9 +45,7 @@ namespace presentacion
                     string ruta = Server.MapPath("./Images/");
                     txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
                     user.UrlImagenPerfil = "perfil-" + user.Id + ".jpg";
-
                 }
-
 
                 user.UrlImagenPerfil = "perfil-" + user.Id + ".jpg";
                 user.Nombre = txtboxNombre.Text;
@@ -56,6 +54,9 @@ namespace presentacion
 
                 Image img = (Image)Master.FindControl("imgAvatar");
                 img.ImageUrl = "~/images/" + user.UrlImagenPerfil;
+                lblPerfilActualizado.Visible = true;
+                
+
             }
             catch (Exception ex)
             {

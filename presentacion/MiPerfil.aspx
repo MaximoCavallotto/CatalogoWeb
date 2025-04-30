@@ -22,6 +22,9 @@
                 <asp:Button ID="btnGuardar" OnClick="btnGuardar_Click" Text="Guardar" runat="server" />
                 <a href="Default.aspx">Regresar</a>
             </div>
+            <div class="mb-3">
+                <asp:Label Style="color: blue" Visible="false" ID="lblPerfilActualizado" Text="Perfil Actualizado" runat="server" />
+            </div>
         </div>
         <div class="col-6">
             <div class="mb-3">

@@ -10,20 +10,33 @@
     </asp:ContentPlaceHolder>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+    <style>
+        .mis-links a.nav-link {
+            font-family: 'Bookman Old Style';
+            color: antiquewhite;
+        }
+
+        a:hover {
+            text-shadow: 0px 0px 5px rgba(255,255,255,0.77);
+            transition: 0.1s ease-in-out;
+        }
+    </style>
+
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Tienda Tuya</a>
+            <nav class="navbar navbar-expand-lg bg-gradient" style="display: flex; align-items: center; background-color: #4F6D7A; color: whitesmoke">
+                <div class="container-fluid" style="max-width: 1200px">
+                    <a class="navbar-brand" style="color: #DBE9EE; font-family: 'Times New Roman', Times, serif; font-weight: bold;" href="#">Tienda Tuya</a>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav mis-links">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="Default.aspx">Home</a>
+                                <a class="nav-link" href="Default.aspx">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="Favoritos.aspx">Favoritos</a>
+                                <a class="nav-link" href="Favoritos.aspx">Favoritos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="Administracion.aspx">Administrar</a>
@@ -34,21 +47,21 @@
                         </ul>
 
                         <%--                        validacion botones a mostrar--%>
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav ms-auto">
 
                             <%if (!negocio.Seguridad.sesionActiva(Session["usuario"]))
                                 {%>
                             <li class="nav-item">
-                                <a class="btn btn-outline-success" href="Login.aspx">Ingresar</a>
+                                <a class="btn btn-light" href="Login.aspx">Ingresar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="Registro.aspx">Registrarse</a>
+                                <a class="nav-link" style="color: #DBE9EE" href="Registro.aspx">Registrarse</a>
                             </li>
                             <%}%>
                             <% else
                                 {%>
-                            <li class="nav-item">
-                                <asp:Button Text="Salir" ID="Button1" OnClick="btnSalir_Click" CssClass="btn btn-danger" runat="server" />
+                            <li class="nav-item me-3">
+                                <asp:Button Text="Salir" ID="Button1" OnClick="btnSalir_Click" CssClass="btn btn-info" runat="server" />
                             </li>
                             <li class="nav-item">
                                 <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%" runat="server" />

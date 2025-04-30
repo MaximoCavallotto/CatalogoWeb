@@ -37,7 +37,6 @@ namespace presentacion
 
                 repArticulos.DataSource = ListaArticulos;
                 repArticulos.DataBind();
-
             }
         }
 
@@ -58,9 +57,13 @@ namespace presentacion
             nuevo.IdUser = ((Usuario)Session["usuario"]).Id;
             favoritoNegocio.agregarFavorito(nuevo);
             
+            
+
+
+
 
         }
-        
+
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
@@ -105,7 +108,7 @@ namespace presentacion
 
         protected void btnMasBarato_Click(object sender, EventArgs e)
         {
-           
+
             {
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 List<Articulo> lista = negocio.listar();
@@ -113,9 +116,9 @@ namespace presentacion
 
                 repArticulos.DataSource = masBaratos;
                 repArticulos.DataBind();
-                
+
             }
-            }
+        }
 
         protected void btnMasCaro_Click(object sender, EventArgs e)
         {
