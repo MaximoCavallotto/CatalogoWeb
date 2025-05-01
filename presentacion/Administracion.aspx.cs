@@ -15,7 +15,7 @@ namespace presentacion
         {
             if (!Seguridad.esAdmin(Session["usuario"]))
             {
-                Session.Add("error", "Se requiere una cuenta de administrador para acceder a este contenido");
+                Session.Add("error", "Se requiere una cuenta de administrador para acceder a este contenido.");
                 Response.Redirect("Error.aspx", false);
             }
 

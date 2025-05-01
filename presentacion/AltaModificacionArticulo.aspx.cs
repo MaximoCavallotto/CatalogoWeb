@@ -106,7 +106,17 @@ namespace presentacion
         protected void btnConfirmarEliminacion_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            negocio.eliminar(int.Parse(Request.QueryString["id"]));
+            if (chboxEliminar.Checked)
+            {
+                negocio.eliminar(int.Parse(Request.QueryString["id"]));
+                Response.Redirect("Administracion.aspx");
+            }
+            else 
+            {
+                banEliminar = true;
+            }
+            
+
         }
 
         protected void btneliminar_Click(object sender, EventArgs e)

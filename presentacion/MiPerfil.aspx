@@ -3,8 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Mi Perfil</h1>
-    <div class="container d-flex justify-content-center gap-2 py-2">
+    <div class="container d-flex justify-content-center gap-2 py-2" style="margin-top:40px">
         <div class="row">
             <div class="col-6">
                 <div class="mb-3">
@@ -29,19 +28,21 @@
                     </div>
                 </div>
             </div>
-            <div class="container d-flex justify-content-center gap-2 py-2">
-                <div class="row">
-                    <div class="mb-3">
-                        <asp:Button ID="btnGuardar" CssClass="btn btn-info" BackColor="#DBE9EE" OnClick="btnGuardar_Click" Text="Guardar" runat="server" />
-                        <a href="Default.aspx">Regresar</a>
-                    </div>
-                </div>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center gap-2 py-2">
+        <div class="row">
+            <div class="mb-3">
+                <asp:Button ID="btnGuardar" CssClass="btn btn-info" BackColor="#DBE9EE" OnClick="btnGuardar_Click" Text="Guardar" runat="server" />
+                <a href="Default.aspx">Regresar</a>
             </div>
-            <div class="container d-flex justify-content-center gap-2 py-2">
-                <div class="row">
-                    <div class="mb-3">
-                        <asp:Label Style="color: blue" Visible="false" ID="lblPerfilActualizado" Text="Perfil Actualizado" runat="server" />
-                    </div>
-                </div>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center gap-2 py-2">
+        <div class="row">
+            <div class="mb-3">
+                <asp:Label Style="color: blue" Visible="false" ID="lblPerfilActualizado" Text="Perfil Actualizado" runat="server" />
             </div>
+        </div>
+    </div>
 </asp:Content>
