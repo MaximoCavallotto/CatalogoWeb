@@ -24,6 +24,22 @@
 
         body {
             background-color: #DBE9EE !important;
+            position: relative;
+            padding-bottom: 120px;
+            box-sizing: border-box;
+        }
+
+        .miFooter {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 120px;
+            background-color: #4F6D7A;
+            height: 120px;
+            color: antiquewhite;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+            font-size: 10px;
         }
     </style>
 
@@ -33,7 +49,7 @@
         <div>
             <nav class="navbar navbar-expand-lg bg-gradient" style="display: flex; align-items: center; background-color: #4F6D7A; color: whitesmoke">
                 <div class="container-fluid" style="max-width: 1200px">
-                    <a class="navbar-brand" style="color: #DBE9EE; font-family: 'Times New Roman', Times, serif; font-weight: bold;" href="#">Tienda Tuya</a>
+                    <a class="navbar-brand" style="color: #DBE9EE; font-family: 'Times New Roman', Times, serif; font-weight: bold;" href="Default.aspx">Tienda Tuya</a>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mis-links">
                             <li class="nav-item">
@@ -78,6 +94,21 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+
     </form>
+    <footer>
+        <div class="miFooter fixed-bottom d-flex flex-column justify-content-center align-items-center">
+            <p class="mb-1">Realizado por <strong>Máximo Cavallotto.</strong></p>
+            <p class="mb-2">Proyecto final integrador del curso <strong>Nivel 3</strong> de <em>https://maxiprograma.com/</em></p>
+            <div class="d-flex justify-content-center align-items-center gap-3">
+                <a href="https://github.com/MaximoCavallotto" target="_blank">
+                    <img src="https://img.icons8.com/ios11/512/FFFFFF/github.png" style="width: 40px; height: 40px;" />
+                </a>
+                <a href="https://www.linkedin.com/in/maximo-cavallotto-2234a7288" target="_blank">
+                    <img src="https://www.citypng.com/public/uploads/preview/hd-white-round-outline-linkedin-in-icon-symbol-png-701751695045705urgvxnjd6c.png" style="width: 35px; height: 35px; border-radius: 50%" />
+                </a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -55,7 +55,7 @@
     </div>
 
     <%--Cards--%>
-    <div class="container-fluid" style="margin-top: 20px">
+    <div class="container-fluid" style="margin-top: 20px; margin-bottom: 20px">
         <div class="row row-cols-1 row-cols-md-3 g-4" style="max-width: 100%; margin-left: 100px; margin-right: 100px">
             <asp:Repeater runat="server" ID="repArticulos">
                 <ItemTemplate>
@@ -76,7 +76,7 @@
                                 <asp:UpdatePanel runat="server">
                                     <ContentTemplate>
                                         <div class="d-flex justify-content-center" style="margin-top: 5px">
-                                            <asp:Button ID="btnFavorito" OnClick="btnFavorito_Click" CommandArgument='<%#Eval("id")%>' CssClass="btn btn-outline-warning" CommandName="seleccionadoId" Text="​⭐​" runat="server" />
+                                            <asp:Button ID="btnFavorito" OnClick="btnFavorito_Click" CommandArgument='<%#Eval("id")%>' CssClass="btn btn-outline-warning" Style="color: black" CommandName="seleccionadoId" Text="​Agregar a Favoritos​" runat="server" />
                                         </div>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>

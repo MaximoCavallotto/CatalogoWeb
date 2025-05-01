@@ -3,15 +3,15 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="d-flex justify-content-center gap-2 py-4 bg-gradient" style="background-color: #0081A7 ">
-        <h1 style="color: #DBE9EE; font-family:'Bookman Old Style'; text-shadow: 2px 2px 5px rgba(0,0,0,0.6);">Mis Favoritos</h1>
+    <div class="d-flex justify-content-center gap-2 py-4 bg-gradient" style="background-color: #0081A7">
+        <h1 style="color: #DBE9EE; font-family: 'Bookman Old Style'; text-shadow: 2px 2px 5px rgba(0,0,0,0.6);">Mis Favoritos</h1>
     </div>
-    <div class="container-fluid" style="margin-top: 20px">
-        <div class="row row-cols-1 row-cols-md-3 g-4" style="max-width: 100%; margin-left: 100px; margin-right: 100px">
+    <div class="container-fluid" style="margin-top: 20px; margin-bottom: 20px">
+        <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center" style="max-width: 100%; margin-left: 100px; margin-right: 100px">
             <asp:Repeater runat="server" ID="repArticulos">
                 <ItemTemplate>
                     <div class="col">
-                        <div class="card h-100" style="width: 18rem; background-color: #caf0f8">
+                        <div class="card h-100 shadow" style="width: 18rem; background-color: #caf0f8">
                             <img src="<%#Eval("UrlImagen")%>" class="card-img-top" style="height: 200px; width: 100%; object-fit: contain; background-color: white; padding: 10px;"
                                 onerror="this.onerror=null; this.src = 'https://www.nycourts.gov/courts/ad4/assets/Placeholder.png'" />
                             <div class="card-body">
