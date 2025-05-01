@@ -20,13 +20,12 @@
         <div class="container">
             <%--Barra de búsqueda rápida.--%>
             <div class="container d-flex justify-content-center gap-2 py-2">
-
                 <asp:TextBox CssClass="form-control" Width="400px" runat="server" ID="txtboxBuscar" placeholder="Buscar" />
                 <asp:Button CssClass="btn btn-light" ID="btnBuscar" Text="🔎​" OnClick="btnBuscar_Click" runat="server" />
                 <asp:Button CssClass="btn btn-light" Text="​🔃​" ID="btnReset" OnClick="btnReset_Click" runat="server" />
             </div>
-            <%--Filtros--%>
 
+            <%--Filtros--%>
             <div class="container text-center">
                 <div class="row">
                     <div class="col">
@@ -56,7 +55,7 @@
     </div>
 
     <%--Cards--%>
-    <div class="container-fluid" style="background-color: #DBE9EE; margin-top: 20px">
+    <div class="container-fluid" style="margin-top: 20px">
         <div class="row row-cols-1 row-cols-md-3 g-4" style="max-width: 100%; margin-left: 100px; margin-right: 100px">
             <asp:Repeater runat="server" ID="repArticulos">
                 <ItemTemplate>

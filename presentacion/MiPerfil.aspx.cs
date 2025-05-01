@@ -39,23 +39,24 @@ namespace presentacion
             {
                 UsuarioNegocio negocio = new UsuarioNegocio();
                 Usuario user = (Usuario)Session["usuario"];
-
+                              
                 if (txtImagen.PostedFile.FileName != "")
                 {
                     string ruta = Server.MapPath("./Images/");
                     txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
                     user.UrlImagenPerfil = "perfil-" + user.Id + ".jpg";
                 }
-
+              
                 user.UrlImagenPerfil = "perfil-" + user.Id + ".jpg";
                 user.Nombre = txtboxNombre.Text;
                 user.Apellido = txtboxApellido.Text;
                 negocio.actualizarUser(user);
 
-                Image img = (Image)Master.FindControl("imgAvatar");
-                img.ImageUrl = "~/images/" + user.UrlImagenPerfil;
+                Image imgAvatar = (Image)Master.FindControl("imgAvatar");
+                imgPerfil.ImageUrl = "~/images/" + user.UrlImagenPerfil;
+                imgAvatar.ImageUrl = "~/images/" + user.UrlImagenPerfil;
                 lblPerfilActualizado.Visible = true;
-                
+
 
             }
             catch (Exception ex)
