@@ -288,6 +288,16 @@ namespace negocio
             return listaArtFav;
 
         }
+
+        public void esFavorito(List<Favorito> listaFavUser, List<Articulo> listaArticulos )
+        {
+            if (listaFavUser != null)
+            {
+                foreach (var articulo in listaArticulos)
+                    articulo.EsFavorito = listaFavUser.Any(x => x.IdArticulo == articulo.Id);
+            }
+            
+        }
     }
 
 }

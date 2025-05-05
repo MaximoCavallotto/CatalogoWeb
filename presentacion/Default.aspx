@@ -62,7 +62,7 @@
                     <div class="col">
                         <div class="card h-100 shadow" style="width: 18rem; background-color: #caf0f8">
                             <img src="<%#Eval("UrlImagen")%>" class="card-img-top" style="height: 200px; width: 100%; object-fit: contain; background-color: white; padding: 10px;"
-                                onerror="this.onerror=null; this.src = 'https://www.nycourts.gov/courts/ad4/assets/Placeholder.png'" />
+                                onerror="this.onerror=null; this.src = 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'" />
                             <div class="card-body">
                                 <h5 class="card-title mb-0"><%#Eval("Marca")%></h5>
                                 <p class="card-text mb-3"><i><%#Eval("Modelo")%></i></p>
@@ -76,7 +76,10 @@
                                 <asp:UpdatePanel runat="server">
                                     <ContentTemplate>
                                         <div class="d-flex justify-content-center" style="margin-top: 5px">
-                                            <asp:Button ID="btnFavorito" OnClick="btnFavorito_Click" CommandArgument='<%#Eval("id")%>' CssClass="btn btn-outline-warning" Style="color: black" CommandName="seleccionadoId" Text="​Agregar a Favoritos​" runat="server" />
+                                            <asp:Button ID="btnFavorito" OnClick="btnFavorito_Click" CommandArgument='<%#Eval("id")%>' Visible='<%# !(bool)Eval("EsFavorito")%>' CssClass="btn btn-outline-warning" Style="color: black" CommandName="seleccionadoId" Text="​Agregar a Favoritos​" runat="server" />
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <asp:Label CssClass="btn btn-outline-warning " ID="lblEnFavoritos" Style="color: black; width: 150px; background-color:  #f7dc41 " Visible='<%#(bool)Eval("EsFavorito")%>' Text="En Favoritos" runat="server" />
                                         </div>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>

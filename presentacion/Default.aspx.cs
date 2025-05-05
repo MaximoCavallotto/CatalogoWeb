@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -14,8 +15,12 @@ namespace presentacion
     public partial class Default : System.Web.UI.Page
     {
         public List<Articulo> ListaArticulos { get; set; }
+        public List<Favorito> ListaFavUser { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            ListaFavUser = new List<Favorito>();
+
             if (!IsPostBack)
             {
                 MarcaNegocio marcaNegocio = new MarcaNegocio();
@@ -32,12 +37,22 @@ namespace presentacion
                 ddlCategoria.DataTextField = "Descripcion";
                 ddlCategoria.DataBind();
 
-                ArticuloNegocio negocio = new ArticuloNegocio();
-                ListaArticulos = negocio.listar();
-
-                repArticulos.DataSource = ListaArticulos;
-                repArticulos.DataBind();
             }
+
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            ListaArticulos = negocio.listar();
+            
+            FavoritoNegocio favoritoNegocio = new FavoritoNegocio();
+
+            if (Seguridad.sesionActiva(Session["usuario"]))
+            {
+                ListaFavUser = favoritoNegocio.listarFavUser(((Usuario)Session["usuario"]).Id);
+            }
+
+            negocio.esFavorito(ListaFavUser, ListaArticulos);
+
+            repArticulos.DataSource = ListaArticulos;
+            repArticulos.DataBind();
         }
 
         protected void btnDetalle_Click(object sender, EventArgs e)
@@ -56,19 +71,22 @@ namespace presentacion
             nuevo.IdArticulo = int.Parse(seleccionadoId);
             nuevo.IdUser = ((Usuario)Session["usuario"]).Id;
             favoritoNegocio.agregarFavorito(nuevo);
-            
-            
 
-
-
-
+            Response.Redirect("Favoritos.aspx", false);
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             List<Articulo> lista = negocio.listar();
+            FavoritoNegocio favoritoNegocio = new FavoritoNegocio();
+            if (Seguridad.sesionActiva(Session["usuario"]))
+            {
+                ListaFavUser = favoritoNegocio.listarFavUser(((Usuario)Session["usuario"]).Id);
+                negocio.esFavorito(ListaFavUser, lista);
+            }
             List<Articulo> listaFiltrada = lista.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(txtboxBuscar.Text.ToUpper()) || x.Modelo.ToUpper().Contains(txtboxBuscar.Text.ToUpper()));
+
 
             repArticulos.DataSource = listaFiltrada;
             repArticulos.DataBind();
@@ -77,7 +95,17 @@ namespace presentacion
         protected void btnReset_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            repArticulos.DataSource = negocio.listar();
+            FavoritoNegocio favoritoNegocio = new FavoritoNegocio();
+            List<Articulo> lista = negocio.listar();
+
+            if (Seguridad.sesionActiva(Session["usuario"]))
+            {
+                ListaFavUser = favoritoNegocio.listarFavUser(((Usuario)Session["usuario"]).Id);
+                negocio.esFavorito(ListaFavUser, lista);
+            }
+
+
+            repArticulos.DataSource = lista;
             repArticulos.DataBind();
 
         }
@@ -88,7 +116,16 @@ namespace presentacion
 
             ArticuloNegocio negocio = new ArticuloNegocio();
             List<Articulo> lista = negocio.listar();
+            FavoritoNegocio favoritoNegocio = new FavoritoNegocio();
+            if (Seguridad.sesionActiva(Session["usuario"]))
+            {
+                ListaFavUser = favoritoNegocio.listarFavUser(((Usuario)Session["usuario"]).Id);
+                negocio.esFavorito(ListaFavUser, lista);
+            }
+
             List<Articulo> listaFiltrada = lista.FindAll(x => x.Marca.Descripcion == marcaSeleccionada);
+
+
 
             repArticulos.DataSource = listaFiltrada;
             repArticulos.DataBind();
@@ -100,7 +137,17 @@ namespace presentacion
 
             ArticuloNegocio negocio = new ArticuloNegocio();
             List<Articulo> lista = negocio.listar();
+
+            FavoritoNegocio favoritoNegocio = new FavoritoNegocio();
+            if (Seguridad.sesionActiva(Session["usuario"]))
+            {
+                ListaFavUser = favoritoNegocio.listarFavUser(((Usuario)Session["usuario"]).Id);
+                negocio.esFavorito(ListaFavUser, lista);
+            }
+
             List<Articulo> listaFiltrada = lista.FindAll(x => x.Categoria.Descripcion == categoriaSeleccionada);
+
+
 
             repArticulos.DataSource = listaFiltrada;
             repArticulos.DataBind();
@@ -112,7 +159,16 @@ namespace presentacion
             {
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 List<Articulo> lista = negocio.listar();
+
+                FavoritoNegocio favoritoNegocio = new FavoritoNegocio();
+                if (Seguridad.sesionActiva(Session["usuario"]))
+                {
+                    ListaFavUser = favoritoNegocio.listarFavUser(((Usuario)Session["usuario"]).Id);
+                    negocio.esFavorito(ListaFavUser, lista);
+                }
+
                 List<Articulo> masBaratos = lista.OrderBy(x => x.Precio).ToList();
+
 
                 repArticulos.DataSource = masBaratos;
                 repArticulos.DataBind();
@@ -124,7 +180,17 @@ namespace presentacion
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             List<Articulo> lista = negocio.listar();
+
+            FavoritoNegocio favoritoNegocio = new FavoritoNegocio();
+            if (Seguridad.sesionActiva(Session["usuario"]))
+            {
+                ListaFavUser = favoritoNegocio.listarFavUser(((Usuario)Session["usuario"]).Id);
+                negocio.esFavorito(ListaFavUser, lista);
+            }
+
             List<Articulo> masCaros = lista.OrderByDescending(x => x.Precio).ToList();
+
+           
 
             repArticulos.DataSource = masCaros;
             repArticulos.DataBind();

@@ -20,6 +20,8 @@ namespace dominio
 
         //prop auxiliar para poder evaluar en la funcion eliminar favorito.
         public int IdFavorito { get; set; }
+        public bool EsFavorito { get; set; }
+
         public decimal Precio { get; set; }
 
         [DisplayName ("Precio")]

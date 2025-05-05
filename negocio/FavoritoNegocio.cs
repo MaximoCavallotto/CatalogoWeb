@@ -44,15 +44,49 @@ namespace negocio
 
                 throw ex;
             }
-            finally 
+            finally
             {
                 datos.cerrarConexion();
             }
-        
-        
-        
+
+
+
         }
 
+        public List<Favorito> listarFavUser(int idUser)
+        {
+            List<Favorito> listaFavUser = new List<Favorito>();
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select Id, IdArticulo from FAVORITOS where IdUser = @iduser");
+                datos.setearParametro("@iduser", idUser);
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Favorito aux = new Favorito();
+
+                    aux.IdArticulo = (int)datos.Lector["IdArticulo"];
+                    aux.Id = (int)datos.Lector["Id"];
+                    listaFavUser.Add(aux);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            return listaFavUser;
+            
+        }
         
     }
 }
