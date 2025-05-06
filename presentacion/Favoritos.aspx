@@ -15,7 +15,7 @@
 
     </div>
     <div class="d-flex justify-content-center">
-        <p>Agrega tus artículos favoritos para tenerlos reunidos acá.</p>
+        <p>Agregá tus artículos favoritos para tenerlos reunidos acá.</p>
     </div>
     <div class="d-flex justify-content-center">
         <asp:Image ImageUrl="~/Images/FavoritosVacio.png"

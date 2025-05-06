@@ -15,28 +15,39 @@ namespace presentacion
         public List<Articulo> articulosFavoritos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Seguridad.sesionActiva(Session["usuario"]))
+            try
             {
-                string userId = ((Usuario)Session["usuario"]).Id.ToString();
-                ArticuloNegocio negocio = new ArticuloNegocio();
-                articulosFavoritos = negocio.listarArtFavoritos(userId);
+                if (Seguridad.sesionActiva(Session["usuario"]))
+                {
+                    string userId = ((Usuario)Session["usuario"]).Id.ToString();
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    articulosFavoritos = negocio.listarArtFavoritos(userId);
 
-                repArticulos.DataSource = articulosFavoritos;
-                repArticulos.DataBind();
+                    repArticulos.DataSource = articulosFavoritos;
+                    repArticulos.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
             }
         }
 
         protected void btnEliminarFav_Click(object sender, EventArgs e)
         {
             FavoritoNegocio favoritoNegocio = new FavoritoNegocio();
-            
-            int IdFavorito = int.Parse(((Button)sender).CommandArgument);
-            favoritoNegocio.eliminarFavorito(IdFavorito);
-            Response.Redirect("Favoritos.aspx", false);
-
-
-
-
+            try
+            {
+                int IdFavorito = int.Parse(((Button)sender).CommandArgument);
+                favoritoNegocio.eliminarFavorito(IdFavorito);
+                Response.Redirect("Favoritos.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void btnDetalle_Click(object sender, EventArgs e)

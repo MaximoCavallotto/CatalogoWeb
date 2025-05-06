@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -23,13 +24,20 @@ namespace presentacion
                 Usuario usuario = new Usuario();
                 UsuarioNegocio negocio = new UsuarioNegocio();
 
-                usuario.Email = txtboxEmail.Text;
-                usuario.Pass = txtboxPass.Text;
-                usuario.Id = negocio.insertarNuevo(usuario);
-                Session.Add("usuario", usuario);
+                if (string.IsNullOrEmpty(txtboxEmail.Text) || string.IsNullOrEmpty(txtboxPass.Text))
+                {
+                    Session.Add("error", "Debes completar ambos campos.");
+                    Response.Redirect("Error.aspx", false);
+                }
+                else
+                {
+                    usuario.Email = txtboxEmail.Text;
+                    usuario.Pass = txtboxPass.Text;
+                    usuario.Id = negocio.insertarNuevo(usuario);
+                    Session.Add("usuario", usuario);
 
-                Response.Redirect("MiPerfil.aspx", false);
-
+                    Response.Redirect("MiPerfil.aspx", false);
+                }
             }
             catch (Exception ex)
             {

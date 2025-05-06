@@ -1,6 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="AltaModificacionArticulo.aspx.cs" Inherits="presentacion.AltaModificacionArticulo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .validator {
+            color: red;
+            font-style: italic;
+            font-size: 13px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
@@ -26,18 +33,23 @@
                     <div class="mb-3">
                         <label for="txtboxModelo" class="form-label">Modelo: </label>
                         <asp:TextBox ID="txtboxModelo" CssClass="form-control" runat="server" />
+                        <asp:RequiredFieldValidator ErrorMessage="Debes ingresar el modelo del producto." CssClass="validator" ControlToValidate="txtboxModelo" runat="server" />
                     </div>
                     <div class="mb-3">
                         <label for="txtboxCodigo" class="form-label">Código: </label>
                         <asp:TextBox ID="txtboxCodigo" CssClass="form-control" runat="server" />
+                        <asp:RequiredFieldValidator ErrorMessage="Debes ingresar el código del producto." CssClass="validator" ControlToValidate="txtboxCodigo" runat="server" />
                     </div>
                     <div class="mb-3">
                         <label for="txtboxDescripcion" class="form-label">Descripción: </label>
                         <asp:TextBox ID="txtboxDescripcion" CssClass="form-control" runat="server" />
+                        <asp:RequiredFieldValidator ErrorMessage="Debes ingresar una descripción para el producto" CssClass="validator" ControlToValidate="txtboxDescripcion" runat="server" />
                     </div>
                     <div class="mb-3">
                         <label for="txtboxPrecio" class="form-label">Precio: </label>
                         <asp:TextBox ID="txtboxPrecio" CssClass="form-control" runat="server" />
+                        <asp:RequiredFieldValidator ErrorMessage="Debes ingresar el precio del producto" CssClass="validator" ControlToValidate="txtboxPrecio" runat="server" />
+                        <asp:RegularExpressionValidator ValidationExpression="^[0-9]+$" CssClass="validator" ErrorMessage="Ingrese solo números enteros." ControlToValidate="txtboxPrecio" runat="server" />
                     </div>
 
                 </div>
@@ -74,11 +86,11 @@
                                 <asp:Button CssClass="btn btn-danger" Text="Eliminar" ID="btnConfirmarEliminacion" OnClick="btnConfirmarEliminacion_Click" runat="server" />
                                 <%  }
                                 %>
-                                
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </asp:Content>

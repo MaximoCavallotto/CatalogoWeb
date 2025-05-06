@@ -298,6 +298,17 @@ namespace negocio
             }
             
         }
+        public bool soloNumeros(string cadena)
+        {
+            foreach (char item in cadena)
+            {
+                if (!(char.IsNumber(item)))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
 }

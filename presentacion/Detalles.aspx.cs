@@ -13,19 +13,26 @@ namespace presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-
-            if (Request.QueryString["id"] != null)
+            try
             {
-                int id = int.Parse((Request.QueryString["id"].ToString()));
+                if (Request.QueryString["id"] != null)
+                {
+                    int id = int.Parse((Request.QueryString["id"].ToString()));
 
-                ArticuloNegocio negocio = new ArticuloNegocio();
-                Articulo seleccionado = negocio.listar().Find(x => x.Id == id);
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    Articulo seleccionado = negocio.listar().Find(x => x.Id == id);
 
-                lblTitulo.Text = seleccionado.Marca.Descripcion + " " + seleccionado.Modelo;
-                imgImagen.ImageUrl = seleccionado.UrlImagen;
-                lblDescripcion.Text = seleccionado.Descripcion;
-                lblPrecio.Text = "$" + seleccionado.PrecioFormateado;
+                    lblTitulo.Text = seleccionado.Marca.Descripcion + " " + seleccionado.Modelo;
+                    imgImagen.ImageUrl = seleccionado.UrlImagen;
+                    lblDescripcion.Text = seleccionado.Descripcion;
+                    lblPrecio.Text = "$" + seleccionado.PrecioFormateado;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
             }
         }
     }

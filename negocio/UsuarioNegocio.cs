@@ -36,7 +36,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
 
             try
-            {
+            {                
                 datos.setearConsulta("Select id, nombre, apellido, admin, urlImagenPerfil from Users where email = @email and pass = @pass");
                 datos.setearParametro("@email", usuario.Email);
                 datos.setearParametro("@pass", usuario.Pass);

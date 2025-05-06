@@ -1,9 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="MiPerfil.aspx.cs" Inherits="presentacion.MiPerfil" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .validator {
+            color: red;
+            font-style: italic;
+            font-size: 13px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container d-flex justify-content-center gap-2 py-2" style="margin-top:40px">
+    <div class="container d-flex justify-content-center gap-2 py-2" style="margin-top: 40px">
         <div class="row">
             <div class="col-6">
                 <div class="mb-3">
@@ -13,10 +20,12 @@
                 <div class="mb-3">
                     <label for="txtboxNombre" class="form-label">Nombre: </label>
                     <asp:TextBox ID="txtboxNombre" CssClass="form-control" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Debes ingresar tu nombre." CssClass="validator" ControlToValidate="txtboxNombre" runat="server" />
                 </div>
                 <div class="mb-3">
                     <label for="txtboxApellido" class="form-label">Apellido: </label>
                     <asp:TextBox ID="txtboxApellido" CssClass="form-control" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Debes ingresar tu apellido" CssClass="validator" ControlToValidate="txtboxApellido" runat="server" />
                 </div>
             </div>
             <div class="col-6">
@@ -24,7 +33,8 @@
                     <label class="form-label" for="txtImagen">Imagen de Perfil:</label>
                     <input type="file" id="txtImagen" runat="server" class="form-control" />
                     <div class="mb-3 d-flex align-items-center" style="height: 200px;">
-                        <asp:Image ID="imgPerfil" ImageUrl="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" runat="server" Style="max-width: 200px; max-height: 200px; margin: 0 auto; display: block" CssClass=" img-fluid mb-3" />
+                        <asp:Image ID="imgPerfil" ImageUrl="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" runat="server" Style="max-width: 200px; max-height: 200px; margin: 0 auto; display: block" CssClass=" img-fluid mb-3"
+                            onerror="this.onerror=null; this.src = 'https://www.nycourts.gov/courts/ad4/assets/Placeholder.png'" />
                     </div>
                 </div>
             </div>

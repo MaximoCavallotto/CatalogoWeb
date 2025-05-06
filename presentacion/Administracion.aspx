@@ -1,6 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Administracion.aspx.cs" Inherits="presentacion.Administracion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .validator {
+            color: red;
+            font-style: italic;
+            font-size: 13px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="d-flex justify-content-center align-items-center" style="margin-top: 20px">
@@ -38,6 +45,12 @@
                     <asp:TextBox CssClass="form-control" Style="width: 200px" ID="txtboxFiltro" runat="server" />
                     <asp:Button CssClass="btn btn-outline-success btn-sm" ID="btnBuscarFiltroAvanzado" OnClick="btnBuscarFiltroAvanzado_Click" Text="Buscar" runat="server" />
                     <asp:Button CssClass="btn btn-outline-success btn-sm" Text="🗑️​" ID="btnBorrarFiltro" OnClick="btnBorrarFiltro_Click" runat="server" />
+
+                </div>
+                <div class="row d-flex justify-content-center align-items-center gap-2 mb-3">
+                    <div class="col-6">
+                        <asp:Label Text="Debes completar con solamente números enteros" autopostback="true" ID="lblSoloNumeros" Visible="false" CssClass="validator" runat="server" />
+                    </div>
                 </div>
                 <% }%>
                 <%--Data Grid--%>

@@ -13,7 +13,7 @@ namespace presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void btnIngresar_Click(object sender, EventArgs e)
@@ -33,8 +33,16 @@ namespace presentacion
                 }
                 else
                 {
-                    Session.Add("error", "Usuario o Contraseña incorrecta. Por favor reintente.");
-                    Response.Redirect("Error.aspx", false);
+                    if (string.IsNullOrEmpty(txtboxEmail.Text) || string.IsNullOrEmpty(txtboxPass.Text))
+                    {
+                        Session.Add("error", "Debes completar ambos campos.");
+                        Response.Redirect("Error.aspx", false);
+                    }
+                    else
+                    {
+                        Session.Add("error", "Usuario o Contraseña incorrecta. Por favor reintente.");
+                        Response.Redirect("Error.aspx", false);
+                    }
                 }
             }
             catch (Exception ex)
@@ -43,7 +51,7 @@ namespace presentacion
                 Response.Redirect("Error.aspx", false);
             }
 
-           
+
         }
     }
 }

@@ -7,10 +7,10 @@
         <div class="row">
             <div class="d-flex flex-column align-items-center">
                 <div class="mb-3">
-                    <asp:TextBox ID="txtboxEmail" CssClass="form-control" placeholder="Email" Width="300px" runat="server" />
+                    <asp:TextBox ID="txtboxEmail" required="true" CssClass="form-control" placeholder="Email" Width="300px" runat="server" />
                 </div>
                 <div class="mb-3">
-                    <asp:TextBox type="password" ID="txtboxPass" CssClass="form-control" placeholder="Contraseña" Width="300px" runat="server" />
+                    <asp:TextBox type="password" required="true" ID="txtboxPass" CssClass="form-control" placeholder="Contraseña" Width="300px" runat="server" />
                 </div>
                 <div class="mb-3">
                     <asp:Button Text="Registrarse" CssClass="btn btn-primary btn-sm" ID="btnRegistrarse" OnClick="btnRegistrarse_Click" runat="server" />

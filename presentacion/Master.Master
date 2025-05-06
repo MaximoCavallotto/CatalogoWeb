@@ -28,6 +28,9 @@
             padding-bottom: 120px;
             box-sizing: border-box;
         }
+         .wrapper {
+            padding-bottom: 120px; 
+        }
 
         .miFooter {
             position: absolute;
@@ -46,7 +49,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div class="wrapper">
             <nav class="navbar navbar-expand-lg bg-gradient" style="display: flex; align-items: center; background-color: #4F6D7A; color: whitesmoke">
                 <div class="container-fluid" style="max-width: 1200px">
                     <a class="navbar-brand" style="color: #DBE9EE; font-family: 'Times New Roman', Times, serif; font-weight: bold;" href="Default.aspx">Tienda Tuya</a>
@@ -84,7 +87,7 @@
                                 <asp:Button Text="Salir" ID="Button1" OnClick="btnSalir_Click" CssClass="btn btn-info" runat="server" />
                             </li>
                             <li class="nav-item">
-                                <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%" runat="server" />
+                                <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%" runat="server" onerror = "this.onerror=null; this.src = 'https://cdn.vectorstock.com/i/500p/08/19/gray-photo-placeholder-icon-design-ui-vector-35850819.jpg'"/>
                             </li>
                             <%}%>
                         </ul>
