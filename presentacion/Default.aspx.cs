@@ -87,6 +87,11 @@ namespace presentacion
             }
             List<Articulo> listaFiltrada = lista.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(txtboxBuscar.Text.ToUpper()) || x.Modelo.ToUpper().Contains(txtboxBuscar.Text.ToUpper()));
 
+            if (listaFiltrada.Count == 0)
+            {
+                lblNingunArticulo.Visible = true;
+            }
+
 
             repArticulos.DataSource = listaFiltrada;
             repArticulos.DataBind();
@@ -104,7 +109,7 @@ namespace presentacion
                 negocio.esFavorito(ListaFavUser, lista);
             }
 
-
+            lblNingunArticulo.Visible = false;
             repArticulos.DataSource = lista;
             repArticulos.DataBind();
 

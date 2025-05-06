@@ -38,6 +38,10 @@ namespace presentacion
             List<Articulo> lista = (List<Articulo>)Session["listaArticulos"];
             List<Articulo> listaFiltrada = lista.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(txtboxFiltroRapido.Text.ToUpper()) || x.Modelo.ToUpper().Contains(txtboxFiltroRapido.Text.ToUpper()));
 
+            if (listaFiltrada.Count == 0)
+            {
+                lblNingunArticulo.Visible = true;
+            }
             dgvArticulos.DataSource = listaFiltrada;
             dgvArticulos.DataBind();
         }
@@ -46,6 +50,7 @@ namespace presentacion
         {
             dgvArticulos.DataSource = Session["listaArticulos"];
             dgvArticulos.DataBind();
+            lblNingunArticulo.Visible = false;
         }
 
         protected void chboxFiltroAvanzado_CheckedChanged(object sender, EventArgs e)
@@ -76,7 +81,14 @@ namespace presentacion
             try
             {
                 ArticuloNegocio negocio = new ArticuloNegocio();
-                dgvArticulos.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtboxFiltro.Text);
+                List<Articulo> listaFiltrada = negocio.filtrar(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtboxFiltro.Text);
+
+                if (listaFiltrada.Count == 0)
+                {
+                    lblNingunArticulo.Visible = true;
+                }
+
+                dgvArticulos.DataSource = listaFiltrada;
                 dgvArticulos.DataBind();
             }
             catch (Exception ex)
@@ -88,6 +100,7 @@ namespace presentacion
 
         protected void btnBorrarFiltro_Click(object sender, EventArgs e)
         {
+            lblNingunArticulo.Visible=false;
             dgvArticulos.DataSource = Session["listaArticulos"];
             dgvArticulos.DataBind();
         }

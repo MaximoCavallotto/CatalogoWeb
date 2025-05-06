@@ -11,7 +11,8 @@
                         <asp:Label ID="lblTitulo" Text="" runat="server" />
                     </div>
                     <div class="card-body">
-                        <asp:Image ID="imgImagen" ImageUrl="" runat="server" Style="max-width: 300px; max-height: 300px; margin: 0 auto; display: block" />
+                        <asp:Image ID="imgImagen" ImageUrl="" runat="server" Style="max-width: 300px; max-height: 300px; margin: 0 auto; display: block"
+                             onerror="this.onerror=null; this.src = 'https://www.nycourts.gov/courts/ad4/assets/Placeholder.png'"/>
                         <p>
                             <asp:Label ID="lblDescripcion" Text="" runat="server" Font-Italic="True" />
                         </p>

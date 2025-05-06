@@ -12,6 +12,9 @@
                     <asp:TextBox ID="txtboxFiltroRapido" AutoPostBack="true" OnTextChanged="txtboxFiltroRapido_TextChanged" placeHolder="Buscá por marca o modelo" CssClass="form-control" runat="server" Style="width: 400px" />
                     <asp:Button ID="btnLimpiarFiltro" Text="Limpiar" CssClass="btn btn-outline-success btn-sm" UseSubmitBehavior="false" OnClick="btnLimpiarFiltro_Click" runat="server" />
                 </div>
+                <div>
+                    <asp:Label CssClass="d-flex justify-content-center gap-2 py-2" Style="color: black" ID="lblNingunArticulo" Visible="false" Text="No existe ningun artículo con estos criterios de búsqueda..." runat="server" />
+                </div>
                 <%--Filtro Avanzado--%>
                 <div class="mb-3">
                     <asp:CheckBox ID="chboxFiltroAvanzado" AutoPostBack="true" Text="Filtro Avanzado" OnCheckedChanged="chboxFiltroAvanzado_CheckedChanged" runat="server" />

@@ -20,9 +20,12 @@
         <div class="container">
             <%--Barra de búsqueda rápida.--%>
             <div class="container d-flex justify-content-center gap-2 py-2">
-                <asp:TextBox CssClass="form-control" Width="400px" runat="server" ID="txtboxBuscar" placeholder="Buscar" />
+                <asp:TextBox CssClass="form-control" Width="400px" runat="server" ID="txtboxBuscar" placeholder="Buscar por marca o modelo" />
                 <asp:Button CssClass="btn btn-light" ID="btnBuscar" Text="🔎​" OnClick="btnBuscar_Click" runat="server" />
                 <asp:Button CssClass="btn btn-light" Text="​🔃​" ID="btnReset" OnClick="btnReset_Click" runat="server" />
+            </div>
+            <div>   
+                <asp:Label CssClass="d-flex justify-content-center gap-2 py-2" Style="color: antiquewhite" id="lblNingunArticulo" Visible="false" Text="No existe ningun artículo con estos criterios de búsqueda..." runat="server" />
             </div>
 
             <%--Filtros--%>

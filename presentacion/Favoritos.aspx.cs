@@ -38,5 +38,11 @@ namespace presentacion
 
 
         }
+
+        protected void btnDetalle_Click(object sender, EventArgs e)
+        {
+            string seleccionadoId = ((Button)sender).CommandArgument;
+            Response.Redirect("Detalles.aspx?id=" + seleccionadoId);
+        }
     }
 }
